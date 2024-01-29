@@ -17,7 +17,7 @@ func (s *helloServer) SayHelloClientStreaming(stream pb.GreetService_SayHelloCLi
 		if err != nil {
 			return err
 		}
-		log.Printf("Got request with name: %v", req.Name)
+		log.Printf("Got request with name : %v", req.Name)
 		messages = append(messages, "Hello "+req.Name)
 	}
 }

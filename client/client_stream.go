@@ -8,11 +8,11 @@ import (
 	pb "github.com/ArpitKRS/go-grpc/proto"
 )
 
-func callSayHelloClientStreaming(client pb.GreetServiceClient, names *pb.NamesList) {
-	log.Printf("Client streaming is started")
+func callSayHelloClientStream(client pb.GreetServiceClient, names *pb.NamesList) {
+	log.Printf("Client Streaming started")
 	stream, err := client.SayHelloCLientStreaming(context.Background())
 	if err != nil {
-		log.Fatalf("Could not send the names: %v", err)
+		log.Fatalf("Could not send names: %v", err)
 	}
 
 	for _, name := range names.Names {
@@ -22,12 +22,12 @@ func callSayHelloClientStreaming(client pb.GreetServiceClient, names *pb.NamesLi
 		if err := stream.Send(req); err != nil {
 			log.Fatalf("Error while sending %v", err)
 		}
-		log.Printf("Sent the request with name: %s", name)
+		log.Printf("Sent request with name: %s", name)
 		time.Sleep(2 * time.Second)
 	}
 
 	res, err := stream.CloseAndRecv()
-	log.Printf("Client streaming finished")
+	log.Printf("Client Streaming finished")
 	if err != nil {
 		log.Fatalf("Error while receiving %v", err)
 	}
